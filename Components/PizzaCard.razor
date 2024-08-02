@@ -1,0 +1,18 @@
+﻿@using BlazingPizzaDemo.Model
+
+@if (special is not null)
+{
+    <div class="card col-md-3 m-1" style="width: 18rem;height: 23rem;">
+        <img src="@special.ImageUrl" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">@special.Name</h5>
+            <p class="card-text text-truncate">@special.Description</p>
+            <a href="#" class="btn btn-primary">@special.GetFormattedBasePrice()</a>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public PizzaSpecial special { get; set; } = new();
+}
