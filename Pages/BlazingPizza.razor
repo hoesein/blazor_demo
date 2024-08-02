@@ -1,0 +1,43 @@
+﻿@page "/staticpizza"
+@using BlazingPizzaDemo.Model
+
+<PageTitle>Blazing Pizza</PageTitle>
+
+
+<div class="container">
+    <h3>BlazingPizza</h3>
+    <div class="row">
+        @if (specials != null)
+        {
+            @foreach (var special in specials)
+            {
+                <div class="card col-md-3 m-1" style="width: 18rem;">
+                    <img src="https://randomwordgenerator.com/img/picture-generator/5fe5d240424faa0df7c5d57bc32f3e7b1d3ac3e45659764e70277fd691_640.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">@special.Name</h5>
+                        <p class="card-text text-truncate">@special.Description</p>
+                        <a href="#" class="btn btn-primary">@special.GetFormattedBasePrice()</a>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+@code {
+
+    List<PizzaSpecial> specials = new();
+
+    protected override void OnInitialized()
+    {
+        specials.AddRange(new List<PizzaSpecial>
+        {
+            new PizzaSpecial { Name = "The Baconatorizor", BasePrice =  11.99M, Description = "It has EVERY kind of bacon", ImageUrl="img/pizzas/bacon.jpg"},
+            new PizzaSpecial { Name = "Buffalo chicken", BasePrice =  12.75M, Description = "Spicy chicken, hot sauce, and blue cheese, guaranteed to warm you up", ImageUrl="img/pizzas/meaty.jpg"},
+            new PizzaSpecial { Name = "Veggie Delight", BasePrice =  11.5M, Description = "It's like salad, but on a pizza", ImageUrl="img/pizzas/salad.jpg"},
+            new PizzaSpecial { Name = "Margherita", BasePrice =  9.99M, Description = "Traditional Italian pizza with tomatoes and basil", ImageUrl="img/pizzas/margherita.jpg"},
+            new PizzaSpecial { Name = "Basic Cheese Pizza", BasePrice =  11.99M, Description = "It's cheesy and delicious. Why wouldn't you want one?", ImageUrl="img/pizzas/cheese.jpg"},
+            new PizzaSpecial { Name = "Classic pepperoni", BasePrice =  10.5M, Description = "It's the pizza you grew up with, but Blazing hot!", ImageUrl="img/pizzas/pepperoni.jpg" }
+
+        });
+    }
+}

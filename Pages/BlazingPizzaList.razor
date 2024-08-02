@@ -1,0 +1,43 @@
+﻿@page "/apipizza"
+
+@using BlazingPizzaDemo.Model
+
+@inject HttpClient HttpClient
+@inject NavigationManager NavigationManager
+
+<div class="container">
+    <h3>BlazingPizzaList</h3>
+    <div class="row">
+
+        @if (specials != null)
+        {
+            @foreach (var special in specials)
+            {
+                <div class="card col-md-3 m-1" style="width: 18rem;height: 23rem;">
+                    <img src="@special.ImageUrl" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">@special.Name</h5>
+                        <p class="card-text text-truncate">@special.Description</p>
+                        <a href="#" class="btn btn-primary">@special.GetFormattedBasePrice()</a>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <p>Sorry, there is no data from API.</p>
+        }
+    </div>
+
+</div>
+
+@code {
+
+    List<PizzaSpecial> specials = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        specials = await HttpClient.GetFromJsonAsync<List<PizzaSpecial>>(NavigationManager.BaseUri + "specials");
+    }
+
+}
