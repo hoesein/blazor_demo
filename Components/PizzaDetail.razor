@@ -1,0 +1,46 @@
+﻿ @page "/pizza-detail"
+@using BlazingPizzaDemo.Data
+
+ @inject PizzaDetailService _service
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <img src="@_service.PizzaDetail.ImageUrl" class="rounded float-start" atl="@_service.PizzaDetail.Description" />
+        </div>
+
+        <div class="col-md-8">
+            <div class="mb-3 row">
+                <label class="col-sm-2 col-form-label">Name</label>
+                <div class="col-sm-10">
+                    <input type="text" readonly class="form-control-plaintext" value="@_service.PizzaDetail.Name" />
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label class="col-sm-2 col-form-label">Description</label>
+                <div class="col-sm-10">
+                    <input type="text" readonly class="form-control-plaintext" value="@_service.PizzaDetail.Description" />
+                </div>
+            </div>
+
+            <div class="mb-3 row">
+                <label class="col-sm-2 col-form-label">Topping</label>
+                <div class="col-sm-10">
+                    <input type="text" readonly class="form-control-plaintext" value="@_service.PizzaDetail.Topping" />
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+</div>
+@code {
+    // [Parameter]
+    // public string PizzaName { get; set; } = "Pizza";
+
+    // [Parameter]
+    // public string PizzaDescription { get; set; } = "The best pizza you've ever tasted.";
+}

@@ -1,4 +1,8 @@
-﻿@using BlazingPizzaDemo.Model
+﻿@using BlazingPizzaDemo.Data
+@using BlazingPizzaDemo.Model
+
+@inject PizzaDetailService _detailService;
+@inject NavigationManager Navigation
 
 @if (special is not null)
 {
@@ -8,6 +12,11 @@
             <h5 class="card-title">@special.Name</h5>
             <p class="card-text text-truncate">@special.Description</p>
             <a href="#" class="btn btn-primary">@special.GetFormattedBasePrice()</a>
+
+            <button @onclick="() => NavigateToDetail(special)" class="btn btn-primary">
+                Show Detail
+            </button>
+
         </div>
     </div>
 }
@@ -15,4 +24,19 @@
 @code {
     [Parameter]
     public PizzaSpecial special { get; set; } = new();
+
+    private void NavigateToDetail(PizzaSpecial special)
+    {
+        var pizzaDetail = new BlazingPizzaDemo.Model.PizzaDetail
+            {
+                Name = special.Name,
+                Description = special.Description,
+                ImageUrl = special.ImageUrl,
+                Topping = "In feature"
+            };
+
+        _detailService.PizzaDetail = pizzaDetail;
+
+        Navigation.NavigateTo($"pizza-detail");
+    }
 }
